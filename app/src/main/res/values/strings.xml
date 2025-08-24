@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Application Random User</string>
+    <string name="gender">gender</string>
+    <string name="name">name</string>
+    <string name="location">location</string>
+    <string name="email"> email</string>
+    <string name="login">login</string>
+    <string name="dob">dob</string>
+    <string name="registered">registered</string>
+    <string name="phone">phone</string>
+    <string name="cell"> cell</string>
+    <string name="id">id</string>
+    <string name="picture">picture</string>
+    <string name="nat"> nat</string>
+    <string name="item_photo">Image description</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="input_etSearch">Введите запрос</string>
+</resources>
