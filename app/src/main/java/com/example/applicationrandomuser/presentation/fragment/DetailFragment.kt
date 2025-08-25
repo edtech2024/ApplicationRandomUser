@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.applicationrandomuser.ItemApplication
 import com.example.applicationrandomuser.databinding.FragmentDetailBinding
+import com.example.applicationrandomuser.domain.model.*
 import com.example.applicationrandomuser.presentation.viewmodel.DetailViewModel
 
 class DetailFragment : Fragment() {
@@ -191,71 +192,27 @@ class DetailFragment : Fragment() {
 
                     Text(text = "Detail screen")
 
-                    OutlinedTextField(
-                        value = gender.value,
-                        onValueChange = { detailViewModel.setGender(it) },
-                        label = { Text(text = "gender") }
-                    )
+                    Text(text = gender.value)
 
-                    OutlinedTextField(
-                        value = name.value,
-                        onValueChange = { detailViewModel.setName(it) },
-                        label = { Text(text = "name") }
-                    )
+                    Text(text = name.value)
 
-                    OutlinedTextField(
-                        value = location.value,
-                        onValueChange = { detailViewModel.setLocation(it) },
-                        label = { Text(text = "location") }
-                    )
+                    Text(text = location.value)
 
-                    OutlinedTextField(
-                        value = email.value,
-                        onValueChange = { detailViewModel.setEmail(it) },
-                        label = { Text(text = "email") }
-                    )
+                    Text(text = email.value)
 
-                    OutlinedTextField(
-                        value = login.value,
-                        onValueChange = { detailViewModel.setLogin(it) },
-                        label = { Text(text = "login") }
-                    )
+                    Text(text = login.value)
 
-                    OutlinedTextField(
-                        value = dob.value,
-                        onValueChange = { detailViewModel.setDob(it) },
-                        label = { Text(text = "dob") }
-                    )
+                    Text(text = dob.value)
 
-                    OutlinedTextField(
-                        value = registered.value,
-                        onValueChange = { detailViewModel.setRegistered(it) },
-                        label = { Text(text = "registered") }
-                    )
+                    Text(text = registered.value)
 
-                    OutlinedTextField(
-                        value = phone.value,
-                        onValueChange = { detailViewModel.setPhone(it) },
-                        label = { Text(text = "phone") }
-                    )
+                    Text(text = phone.value)
 
-                    OutlinedTextField(
-                        value = id.value,
-                        onValueChange = { detailViewModel.setId(it) },
-                        label = { Text(text = "id") }
-                    )
+                    Text(text = id.value)
 
-                    OutlinedTextField(
-                        value = picture.value,
-                        onValueChange = { detailViewModel.setPicture(it) },
-                        label = { Text(text = "picture") }
-                    )
+                    Text(text = picture.value)
 
-                    OutlinedTextField(
-                        value = nat.value,
-                        onValueChange = { detailViewModel.setNat(it) },
-                        label = { Text(text = "nat") }
-                    )
+                    Text(text = nat.value)
 
                     Button(onClick = {
                         onCloseClicked()

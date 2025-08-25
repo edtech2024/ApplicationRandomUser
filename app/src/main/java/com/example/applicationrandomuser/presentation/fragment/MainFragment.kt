@@ -223,12 +223,18 @@ class MainFragment : Fragment() {
                     contentScale = ContentScale.Crop
                 )
 
+                Text(text = data.gender)
                 Text(text = data.name.title)
-                Text(text = data.name.first)
-                Text(text = data.name.last)
                 Text(text = data.location.country)
-                Text(text = data.location.city)
+                Text(text = data.email)
+                Text(text = data.login.username)
+                Text(text = data.dob.age)
+                Text(text = data.registered.date)
                 Text(text = data.phone)
+                Text(text = data.cell)
+                Text(text = data.id.value)
+                Text(text = data.picture.thumbnail)
+                Text(text = data.nat)
             }
         }
     }
@@ -243,16 +249,16 @@ class MainFragment : Fragment() {
         val args = Bundle()
 
         args.putString(getString(R.string.gender), item.gender)
-        args.putString(getString(R.string.name), item.name.toString())
-        args.putString(getString(R.string.location), item.location.toString())
+        args.putString(getString(R.string.name), item.name.title)
+        args.putString(getString(R.string.location), item.location.country)
         args.putString(getString(R.string.email), item.email)
-        args.putString(getString(R.string.login), item.login.toString())
-        args.putString(getString(R.string.dob), item.dob.toString())
-        args.putString(getString(R.string.registered), item.registered.toString())
+        args.putString(getString(R.string.login), item.login.username)
+        args.putString(getString(R.string.dob), item.dob.age)
+        args.putString(getString(R.string.registered), item.registered.date)
         args.putString(getString(R.string.phone), item.phone)
         args.putString(getString(R.string.cell), item.cell)
-        args.putString(getString(R.string.id), item.id.toString())
-        args.putString(getString(R.string.picture), item.picture.toString())
+        args.putString(getString(R.string.id), item.id.value)
+        args.putString(getString(R.string.picture), item.picture.medium)
         args.putString(getString(R.string.nat), item.nat)
 
         onOpenClicked(args)

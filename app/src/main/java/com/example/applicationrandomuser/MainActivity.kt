@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
+import com.example.applicationrandomuser.domain.model.*
 import com.example.applicationrandomuser.presentation.fragment.DetailFragment
 import com.example.applicationrandomuser.presentation.fragment.MainFragment
 

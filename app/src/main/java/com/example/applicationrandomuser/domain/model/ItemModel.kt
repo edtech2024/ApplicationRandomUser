@@ -1,5 +1,9 @@
 package com.example.applicationrandomuser.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ItemModel public constructor(
     var gender: String,
     var name: Name,
@@ -13,7 +17,7 @@ data class ItemModel public constructor(
     var id: Id,
     var picture: Picture,
     var nat: String
-) {
+) : Parcelable {
     companion object {
         operator fun invoke(
             gender: String,

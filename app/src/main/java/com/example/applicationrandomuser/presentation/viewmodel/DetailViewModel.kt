@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import com.example.applicationrandomuser.R
 import com.example.applicationrandomuser.domain.converter.StringValue
+import com.example.applicationrandomuser.domain.model.*
 import com.example.applicationrandomuser.presentation.fragment.DetailFragment
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.parcelize.parcelableCreator
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(val bundle: Bundle?, val context: DetailFragment.OnItemCloseListener?) : ViewModel() {
@@ -105,7 +107,7 @@ class DetailViewModel @Inject constructor(val bundle: Bundle?, val context: Deta
     var argRegistered: String = "String"
     var argPhone: String = "String"
     var argCell: String = "String"
-    var argId: String = "0"
+    var argId: String = "String"
     var argPicture: String = "String"
     var argNat: String = "String"
 
@@ -134,36 +136,36 @@ class DetailViewModel @Inject constructor(val bundle: Bundle?, val context: Deta
 
     }
 
-    private fun readBundle(bundle:Bundle){
+   private fun readBundle(bundle: Bundle){
         this.argGender = bundle.getString(StringValue.StringResource(R.string.gender).asString(context as Context), "Gender")
         this.argName = bundle.getString(StringValue.StringResource(R.string.name).asString(context as Context), "Name")
-        this.argLocation = bundle.getString(StringValue.StringResource(R.string.location).asString(context as Context), "Location")
+        this.argLocation = bundle.getString(StringValue.StringResource(R.string.location).asString(context as Context),"Location")
         this.argEmail = bundle.getString(StringValue.StringResource(R.string.email).asString(context as Context), "Email")
         this.argLogin = bundle.getString(StringValue.StringResource(R.string.login).asString(context as Context), "Login")
         this.argDob = bundle.getString(StringValue.StringResource(R.string.dob).asString(context as Context), "Dob")
         this.argRegistered = bundle.getString(StringValue.StringResource(R.string.registered).asString(context as Context), "Registered")
-        this.argPhone = bundle.getString(StringValue.StringResource(R.string.gender).asString(context as Context), "Phone")
-        this.argCell = bundle.getString(StringValue.StringResource(R.string.name).asString(context as Context), "Cell")
-        this.argId = bundle.getString(StringValue.StringResource(R.string.id).asString(context as Context),"5")
-        this.argPicture = bundle.getString(StringValue.StringResource(R.string.gender).asString(context as Context), "Picture")
-        this.argNat = bundle.getString(StringValue.StringResource(R.string.name).asString(context as Context), "Nat")
+        this.argPhone = bundle.getString(StringValue.StringResource(R.string.phone).asString(context as Context), "Phone")
+        this.argCell = bundle.getString(StringValue.StringResource(R.string.cell).asString(context as Context), "Cell")
+        this.argId = bundle.getString(StringValue.StringResource(R.string.id).asString(context as Context), "Id")
+        this.argPicture = bundle.getString(StringValue.StringResource(R.string.picture).asString(context as Context), "Picture")
+        this.argNat = bundle.getString(StringValue.StringResource(R.string.nat).asString(context as Context), "Nat")
     }
 
     private fun setArgs(gender: String, name: String, location: String, email: String, login: String, dob: String,
                         registered: String, phone: String, cell: String, id: String, picture: String, nat: String) {
 
-        setId(gender)
-        setId(name)
-        setId(location)
-        setId(email)
-        setId(login)
-        setId(dob)
-        setId(registered)
-        setId(phone)
-        setId(cell)
+        setGender(gender)
+        setName(name)
+        setLocation(location)
+        setEmail(email)
+        setLogin(login)
+        setDob(dob)
+        setRegistered(registered)
+        setPhone(phone)
+        setCell(cell)
         setId(id)
-        setId(picture)
-        setId(nat)
+        setPicture(picture)
+        setNat(nat)
     }
 
 }
