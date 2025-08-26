@@ -230,18 +230,9 @@ class MainFragment : Fragment() {
                     contentScale = ContentScale.Crop
                 )
 
-                Text(text = data.gender)
                 Text(text = data.name)
                 Text(text = data.location)
-                Text(text = data.email)
-                Text(text = data.login)
-                Text(text = data.dob)
-                Text(text = data.registered)
                 Text(text = data.phone)
-                Text(text = data.cell)
-                Text(text = data.id)
-                Text(text = data.picture)
-                Text(text = data.nat)
             }
         }
     }
