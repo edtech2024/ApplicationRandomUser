@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.applicationrandomuser.ItemApplication
@@ -164,7 +165,7 @@ class MainFragment : Fragment() {
     }
 
     @Composable
-    fun Navigation(viewModel: ListViewModel) {
+    fun Navigation(viewModel: ListViewModel = viewModel()) {
 
         val data = viewModel.itemsList.observeAsState(emptyList())
 
@@ -188,17 +189,17 @@ class MainFragment : Fragment() {
             .padding(10.dp)
         ) {
 
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(count = 2)
-            ) {
-
-                items(data.value, key = { itemUI -> itemUI.id!! } ) {
-                    ListItem(it, onClick = onClick )
-                }
-            }
-
             Button(onClick = { refresh() }) {
                 Text(text = "Refresh", fontSize = 25.sp)
+            }
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(count = 1)
+            ) {
+
+                items(data.value, key = { itemUI -> itemUI.id } ) {
+                    ListItem(it, onClick = onClick )
+                }
             }
         }
     }

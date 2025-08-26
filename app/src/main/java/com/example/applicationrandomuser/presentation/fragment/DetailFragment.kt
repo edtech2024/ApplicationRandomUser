@@ -23,10 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.applicationrandomuser.ItemApplication
 import com.example.applicationrandomuser.databinding.FragmentDetailBinding
 import com.example.applicationrandomuser.domain.model.*
 import com.example.applicationrandomuser.presentation.viewmodel.DetailViewModel
+import com.example.applicationrandomuser.presentation.viewmodel.ListViewModel
 
 class DetailFragment : Fragment() {
 
@@ -125,7 +127,7 @@ class DetailFragment : Fragment() {
         _binding!!.lifecycleOwner = viewLifecycleOwner
         _binding!!.detailViewModel = detailViewModel
 
-        initializationComposeViewDetail()
+        initializationComposeViewDetail(detailViewModel)
 
         return binding.root
     }
@@ -148,20 +150,20 @@ class DetailFragment : Fragment() {
         listenerClose?.onCloseItem()
     }
 
-    private fun initializationComposeViewDetail() {
+    private fun initializationComposeViewDetail(viewModel: DetailViewModel) {
         binding.composeViewDetail.apply {
             // Dispose of the Composition when the view's LifecycleOwner is destroyed
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    DetailScreen()
+                    DetailScreen(Modifier, viewModel)
                 }
             }
         }
     }
 
     @Composable
-    fun DetailScreen(modifier: Modifier = Modifier) {
+    fun DetailScreen(modifier: Modifier, viewModel: DetailViewModel = viewModel()) {
         Row(modifier
             .fillMaxWidth()
             .border(width = 1.dp, color = Color.Black)
@@ -178,17 +180,17 @@ class DetailFragment : Fragment() {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
-                    val gender = detailViewModel.gender.collectAsState()
-                    val name = detailViewModel.name.collectAsState()
-                    val location = detailViewModel.location.collectAsState()
-                    val email = detailViewModel.email.collectAsState()
-                    val login = detailViewModel.login.collectAsState()
-                    val dob = detailViewModel.dob.collectAsState()
-                    val registered = detailViewModel.registered.collectAsState()
-                    val phone = detailViewModel.phone.collectAsState()
-                    val id = detailViewModel.id.collectAsState()
-                    val picture = detailViewModel.picture.collectAsState()
-                    val nat = detailViewModel.nat.collectAsState()
+                    val gender = viewModel.gender.collectAsState()
+                    val name = viewModel.name.collectAsState()
+                    val location = viewModel.location.collectAsState()
+                    val email = viewModel.email.collectAsState()
+                    val login = viewModel.login.collectAsState()
+                    val dob = viewModel.dob.collectAsState()
+                    val registered = viewModel.registered.collectAsState()
+                    val phone = viewModel.phone.collectAsState()
+                    val id = viewModel.id.collectAsState()
+                    val picture = viewModel.picture.collectAsState()
+                    val nat = viewModel.nat.collectAsState()
 
                     Text(text = "Detail screen")
 
