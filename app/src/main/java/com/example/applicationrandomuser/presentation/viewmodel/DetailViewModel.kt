@@ -111,61 +111,61 @@ class DetailViewModel @Inject constructor(val bundle: Bundle?, val context: Deta
     var argPicture: String = "String"
     var argNat: String = "String"
 
-    init {
-        if (bundle != null) {
-            readBundle(bundle)
+   init {
+       if (bundle != null) {
+           readBundle(bundle)
 
-            setArgs(
-                this.argGender,
-                this.argName,
-                this.argLocation,
-                this.argEmail,
-                this.argLogin,
-                this.argDob,
-                this.argRegistered,
-                this.argPhone,
-                this.argCell,
-                this.argId,
-                this.argPicture,
-                this.argNat
-            )
-        }
-    }
+           setArgs(
+               this.argGender,
+               this.argName,
+               this.argLocation,
+               this.argEmail,
+               this.argLogin,
+               this.argDob,
+               this.argRegistered,
+               this.argPhone,
+               this.argCell,
+               this.argId,
+               this.argPicture,
+               this.argNat
+           )
+       }
+   }
 
-    override fun onCleared() {
+   override fun onCleared() {
 
-    }
+   }
 
-   private fun readBundle(bundle: Bundle){
-        this.argGender = bundle.getString(StringValue.StringResource(R.string.gender).asString(context as Context), "Gender")
-        this.argName = bundle.getString(StringValue.StringResource(R.string.name).asString(context as Context), "Name")
-        this.argLocation = bundle.getString(StringValue.StringResource(R.string.location).asString(context as Context),"Location")
-        this.argEmail = bundle.getString(StringValue.StringResource(R.string.email).asString(context as Context), "Email")
-        this.argLogin = bundle.getString(StringValue.StringResource(R.string.login).asString(context as Context), "Login")
-        this.argDob = bundle.getString(StringValue.StringResource(R.string.dob).asString(context as Context), "Dob")
-        this.argRegistered = bundle.getString(StringValue.StringResource(R.string.registered).asString(context as Context), "Registered")
-        this.argPhone = bundle.getString(StringValue.StringResource(R.string.phone).asString(context as Context), "Phone")
-        this.argCell = bundle.getString(StringValue.StringResource(R.string.cell).asString(context as Context), "Cell")
-        this.argId = bundle.getString(StringValue.StringResource(R.string.id).asString(context as Context), "Id")
-        this.argPicture = bundle.getString(StringValue.StringResource(R.string.picture).asString(context as Context), "Picture")
-        this.argNat = bundle.getString(StringValue.StringResource(R.string.nat).asString(context as Context), "Nat")
-    }
+  private fun readBundle(bundle: Bundle){
+       this.argGender = bundle.getString(StringValue.StringResource(R.string.gender).asString(context as Context), "Gender")
+       this.argName = bundle.getString(StringValue.StringResource(R.string.name).asString(context as Context), "Name")
+       this.argLocation = bundle.getString(StringValue.StringResource(R.string.location).asString(context as Context),"Location")
+       this.argEmail = bundle.getString(StringValue.StringResource(R.string.email).asString(context as Context), "Email")
+       this.argLogin = bundle.getString(StringValue.StringResource(R.string.login).asString(context as Context), "Login")
+       this.argDob = bundle.getString(StringValue.StringResource(R.string.dob).asString(context as Context), "Dob")
+       this.argRegistered = bundle.getString(StringValue.StringResource(R.string.registered).asString(context as Context), "Registered")
+       this.argPhone = bundle.getString(StringValue.StringResource(R.string.phone).asString(context as Context), "Phone")
+       this.argCell = bundle.getString(StringValue.StringResource(R.string.cell).asString(context as Context), "Cell")
+       this.argId = bundle.getString(StringValue.StringResource(R.string.id).asString(context as Context), "Id")
+       this.argPicture = bundle.getString(StringValue.StringResource(R.string.picture).asString(context as Context), "Picture")
+       this.argNat = bundle.getString(StringValue.StringResource(R.string.nat).asString(context as Context), "Nat")
+   }
 
-    private fun setArgs(gender: String, name: String, location: String, email: String, login: String, dob: String,
-                        registered: String, phone: String, cell: String, id: String, picture: String, nat: String) {
+   private fun setArgs(gender: String, name: String, location: String, email: String, login: String, dob: String,
+                       registered: String, phone: String, cell: String, id: String, picture: String, nat: String) {
 
-        setGender(gender)
-        setName(name)
-        setLocation(location)
-        setEmail(email)
-        setLogin(login)
-        setDob(dob)
-        setRegistered(registered)
-        setPhone(phone)
-        setCell(cell)
-        setId(id)
-        setPicture(picture)
-        setNat(nat)
-    }
+       setGender(gender)
+       setName(name)
+       setLocation(location)
+       setEmail(email)
+       setLogin(login)
+       setDob(dob)
+       setRegistered(registered)
+       setPhone(phone)
+       setCell(cell)
+       setId(id)
+       setPicture(picture)
+       setNat(nat)
+   }
 
 }

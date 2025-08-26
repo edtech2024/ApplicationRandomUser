@@ -1,4 +1,4 @@
-package com.example.applicationrandomuser.data.mapper
+package com.example.applicationrandomuser.domain.mapper
 
 interface Mapper<in From, out To> {
     fun map(from: From): To

@@ -4,8 +4,8 @@ import android.content.Context
 import com.example.applicationrandomuser.data.database.ItemDatabase
 import com.example.applicationrandomuser.data.mapper.ItemDTOTOModelMapper
 import com.example.applicationrandomuser.data.mapper.ItemEntityToModelMapper
-import com.example.applicationrandomuser.data.mapper.ItemToDTOMapper
-import com.example.applicationrandomuser.data.mapper.ItemToEntityMapper
+import com.example.applicationrandomuser.data.mapper.ModelToDTOMapper
+import com.example.applicationrandomuser.data.mapper.ModelToEntityMapper
 import com.example.applicationrandomuser.data.repositoryimpl.ItemRepositoryImpl
 import com.example.applicationrandomuser.data.web.ItemApiInterface
 import com.example.applicationrandomuser.domain.irepository.IItemRepository
@@ -67,11 +67,11 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideModelToEntityMapper(): ItemToEntityMapper = ItemToEntityMapper()
+    fun provideModelToEntityMapper(): ModelToEntityMapper = ModelToEntityMapper()
 
     @Singleton
     @Provides
-    fun provideModelToDTOMapper(): ItemToDTOMapper = ItemToDTOMapper()
+    fun provideModelToDTOMapper(): ModelToDTOMapper = ModelToDTOMapper()
 
     @Singleton
     @Provides
@@ -87,19 +87,19 @@ class DataModule {
                               itemApiService: ItemApiInterface,
                               dispatcher: CoroutineDispatcher,
                               refreshIntervalMs: Long,
-                              ModelToEntity: ItemToEntityMapper,
-                              ModelToDTO: ItemToDTOMapper,
-                              EntityToModel: ItemEntityToModelMapper,
-                              DTOToModel: ItemDTOTOModelMapper
+                              modelToEntity: ModelToEntityMapper,
+                              modelToDTO: ModelToDTOMapper,
+                              entityToModel: ItemEntityToModelMapper,
+                              dtoToModel: ItemDTOTOModelMapper
     ): IItemRepository = ItemRepositoryImpl(
         database.itemDao(),
         itemApiService,
         dispatcher,
         refreshIntervalMs,
-        ModelToEntity,
-        ModelToDTO,
-        EntityToModel,
-        DTOToModel
+        modelToEntity,
+        modelToDTO,
+        entityToModel,
+        dtoToModel
     )
 
 }

@@ -1,10 +1,12 @@
 package com.example.applicationrandomuser.presentation.di
 
 import android.os.Bundle
+import com.example.applicationrandomuser.data.mapper.ItemDTOTOModelMapper
 import com.example.applicationrandomuser.domain.*
 import com.example.applicationrandomuser.domain.irepository.IItemRepository
 import com.example.applicationrandomuser.domain.iusecase.*
 import com.example.applicationrandomuser.presentation.fragment.DetailFragment
+import com.example.applicationrandomuser.presentation.mapper.ModelToUIMapper
 import com.example.applicationrandomuser.presentation.viewmodel.DetailViewModel
 import com.example.applicationrandomuser.presentation.viewmodel.ListViewModel
 import dagger.Module
@@ -31,18 +33,24 @@ class PresentationModule {
     @Provides
     fun provideUseCaseRefreshItemsImpl(repository: IItemRepository): IUseCaseRefreshItems = UseCaseRefreshItemsImpl(repository)
 
+    @Singleton
+    @Provides
+    fun provideModelToUIMapper(): ModelToUIMapper = ModelToUIMapper()
+
     @Provides
     fun provideListViewModel(useCaseCreateItem: IUseCaseCreateItem,
                              useCaseUpdateItem: IUseCaseUpdateItem,
                              useCaseRequestItems: IUseCaseRequestItems,
                              useCaseQueryLocalItems: IUseCaseQueryLocalItems,
-                             useCaseRefreshItems: IUseCaseRefreshItems
+                             useCaseRefreshItems: IUseCaseRefreshItems,
+                             modelToUI: ModelToUIMapper
     ): ListViewModel = ListViewModel(
         useCaseCreateItem,
         useCaseUpdateItem,
         useCaseRequestItems,
         useCaseQueryLocalItems,
-        useCaseRefreshItems
+        useCaseRefreshItems,
+        modelToUI
     )
 
     @Provides

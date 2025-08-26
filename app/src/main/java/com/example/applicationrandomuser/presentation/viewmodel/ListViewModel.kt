@@ -3,7 +3,11 @@ package com.example.applicationrandomuser.presentation.viewmodel
 import androidx.lifecycle.*
 import com.example.applicationrandomuser.domain.iusecase.*
 import com.example.applicationrandomuser.domain.model.ItemModel
+import com.example.applicationrandomuser.presentation.mapper.ModelToUIMapper
+import com.example.applicationrandomuser.presentation.uistate.ItemUI
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ListViewModel @Inject constructor(
@@ -11,18 +15,19 @@ class ListViewModel @Inject constructor(
     val useCaseUpdateItem: IUseCaseUpdateItem,
     val useCaseRequestItems: IUseCaseRequestItems,
     val useCaseQueryLocalItems: IUseCaseQueryLocalItems,
-    val useCaseRefreshItems: IUseCaseRefreshItems
+    val useCaseRefreshItems: IUseCaseRefreshItems,
+    val ModelToUI: ModelToUIMapper
 ) : ViewModel() {
 
     var argSearch: String = ""
 
-    private var liveData: LiveData<List<ItemModel>> = useCaseQueryLocalItems().asLiveData(Dispatchers.IO) //.collect { liveData.value = it }
+    private var liveData: LiveData<List<ItemUI>> = useCaseQueryLocalItems().map { ModelToUI.mapAll(it) }.asLiveData(Dispatchers.IO)
 
-    private var mediator: MediatorLiveData<List<ItemModel>> = MediatorLiveData<List<ItemModel>>()
+    private var mediator: MediatorLiveData<List<ItemUI>> = MediatorLiveData<List<ItemUI>>()
 
-    var tempList: MutableList<ItemModel> = mutableListOf()
+    var tempList: MutableList<ItemUI> = mutableListOf()
 
-    var itemsList: LiveData<List<ItemModel>> = mediator
+    var itemsList: LiveData<List<ItemUI>> = mediator
 
     init {
         loading()
@@ -35,7 +40,6 @@ class ListViewModel @Inject constructor(
                 useCaseRequestItems()
                 useCaseRefreshItems()
             }
-
         }
 
         mediator.addSource(liveData) { source ->
@@ -60,17 +64,17 @@ class ListViewModel @Inject constructor(
     }
 
     fun sortById(){
-        tempList.sortBy { item -> item.id.name }
+        tempList.sortBy { item -> item.id }
         mediator.postValue(tempList)
     }
 
     fun sortByName() {
-        tempList.sortBy { item -> item.name.title }
+        tempList.sortBy { item -> item.name }
         mediator.postValue(tempList)
     }
 
     fun filtrationByTitle(name: String){
-        var filteredList = tempList.filter { it.name.title.contains(name, ignoreCase = true) }
+        var filteredList = tempList.filter { it.name.contains(name, ignoreCase = true) }
         mediator.postValue(filteredList)
     }
 

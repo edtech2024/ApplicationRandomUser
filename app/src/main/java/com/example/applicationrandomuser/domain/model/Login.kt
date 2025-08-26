@@ -1,9 +1,5 @@
 package com.example.applicationrandomuser.domain.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class Login(
     var uuid: String,
     var username: String,
@@ -12,5 +8,5 @@ data class Login(
     var md5: String,
     var sha1: String,
     var sha256: String
-) : Parcelable
+)
 

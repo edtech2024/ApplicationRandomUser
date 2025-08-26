@@ -37,6 +37,8 @@ import com.example.applicationrandomuser.R
 import com.example.applicationrandomuser.databinding.FragmentMainBinding
 import com.example.applicationrandomuser.domain.iusecase.*
 import com.example.applicationrandomuser.domain.model.ItemModel
+import com.example.applicationrandomuser.presentation.mapper.ModelToUIMapper
+import com.example.applicationrandomuser.presentation.uistate.ItemUI
 import com.example.applicationrandomuser.presentation.viewmodel.ListViewModel
 import javax.inject.Inject
 
@@ -77,6 +79,9 @@ class MainFragment : Fragment() {
     lateinit var useCaseQueryLocalItems: IUseCaseQueryLocalItems
     @Inject
     lateinit var useCaseRefreshItems: IUseCaseRefreshItems
+    @Inject
+    lateinit var modelToUI: ModelToUIMapper
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -92,7 +97,8 @@ class MainFragment : Fragment() {
             override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
                 return ListViewModel(
                     useCaseCreateItem, useCaseUpdateItem,
-                    useCaseRequestItems, useCaseQueryLocalItems, useCaseRefreshItems
+                    useCaseRequestItems, useCaseQueryLocalItems, useCaseRefreshItems,
+                    modelToUI
                 ) as T
             }
         }
@@ -163,8 +169,8 @@ class MainFragment : Fragment() {
         val data = viewModel.itemsList.observeAsState(emptyList())
 
         MainScreen(modifier = Modifier,
-            data = data as State<List<ItemModel>>,
-            onClick = { itemModel -> onItemClicked(itemModel) } ,
+            data = data as State<List<ItemUI>>,
+            onClick = { itemUI -> onItemClicked(itemUI) } ,
             refresh = { viewModel.refresh() }
         )
 
@@ -172,8 +178,8 @@ class MainFragment : Fragment() {
 
     @Composable
     fun MainScreen(modifier: Modifier = Modifier,
-                   data: State<List<ItemModel>>,
-                   onClick: (ItemModel) -> Unit,
+                   data: State<List<ItemUI>>,
+                   onClick: (ItemUI) -> Unit,
                    refresh: () -> Unit) {
 
         Column(modifier
@@ -186,7 +192,7 @@ class MainFragment : Fragment() {
                 columns = GridCells.Fixed(count = 2)
             ) {
 
-                items(data.value, key = { itemModel -> itemModel.id!! } ) {
+                items(data.value, key = { itemUI -> itemUI.id!! } ) {
                     ListItem(it, onClick = onClick )
                 }
             }
@@ -198,9 +204,9 @@ class MainFragment : Fragment() {
     }
 
     @Composable
-    fun ListItem(data: ItemModel,
+    fun ListItem(data: ItemUI,
                  modifier: Modifier = Modifier,
-                 onClick: (ItemModel) -> Unit) {
+                 onClick: (ItemUI) -> Unit) {
         Surface() {
             Row(modifier
                 .fillMaxWidth()
@@ -214,7 +220,7 @@ class MainFragment : Fragment() {
 
                 AsyncImage(
                     model = ImageRequest.Builder(context = LocalContext.current)
-                        .data(data.picture.large)
+                        .data(data.picture)
                         .crossfade(true)
                         .build(),
                     error = painterResource(R.drawable.ic_baseline_broken_image_24),
@@ -224,16 +230,16 @@ class MainFragment : Fragment() {
                 )
 
                 Text(text = data.gender)
-                Text(text = data.name.title)
-                Text(text = data.location.country)
+                Text(text = data.name)
+                Text(text = data.location)
                 Text(text = data.email)
-                Text(text = data.login.username)
-                Text(text = data.dob.age)
-                Text(text = data.registered.date)
+                Text(text = data.login)
+                Text(text = data.dob)
+                Text(text = data.registered)
                 Text(text = data.phone)
                 Text(text = data.cell)
-                Text(text = data.id.value)
-                Text(text = data.picture.thumbnail)
+                Text(text = data.id)
+                Text(text = data.picture)
                 Text(text = data.nat)
             }
         }
@@ -244,21 +250,21 @@ class MainFragment : Fragment() {
         listenerOpen?.onOpenItem(bundle)
     }
 
-    private fun onItemClicked(item: ItemModel){
+    private fun onItemClicked(item: ItemUI){
 
         val args = Bundle()
 
         args.putString(getString(R.string.gender), item.gender)
-        args.putString(getString(R.string.name), item.name.title)
-        args.putString(getString(R.string.location), item.location.country)
+        args.putString(getString(R.string.name), item.name)
+        args.putString(getString(R.string.location), item.location)
         args.putString(getString(R.string.email), item.email)
-        args.putString(getString(R.string.login), item.login.username)
-        args.putString(getString(R.string.dob), item.dob.age)
-        args.putString(getString(R.string.registered), item.registered.date)
+        args.putString(getString(R.string.login), item.login)
+        args.putString(getString(R.string.dob), item.dob)
+        args.putString(getString(R.string.registered), item.registered)
         args.putString(getString(R.string.phone), item.phone)
         args.putString(getString(R.string.cell), item.cell)
-        args.putString(getString(R.string.id), item.id.value)
-        args.putString(getString(R.string.picture), item.picture.medium)
+        args.putString(getString(R.string.id), item.id)
+        args.putString(getString(R.string.picture), item.picture)
         args.putString(getString(R.string.nat), item.nat)
 
         onOpenClicked(args)

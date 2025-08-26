@@ -1,9 +1,10 @@
 package com.example.applicationrandomuser.data.mapper
 
 import com.example.applicationrandomuser.data.dto.ItemDTO
+import com.example.applicationrandomuser.domain.mapper.Mapper
 import com.example.applicationrandomuser.domain.model.ItemModel
 
-class ItemToDTOMapper : Mapper<ItemModel, ItemDTO> {
+class ModelToDTOMapper : Mapper<ItemModel, ItemDTO> {
     override fun map(from: ItemModel): ItemDTO {
         return ItemDTO(
             gender = from.gender,
